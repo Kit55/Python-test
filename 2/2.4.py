@@ -10,9 +10,11 @@ def add_range(_start,_finish):
 
 add_range(0, 10)
 
-#Написать аналог map: 
-#******************************
 def map2(*_ars):
+    """
+    >>> map2([add0,add1],[1,2])
+    [1, 2, 2, 3]
+    """
     l0=list()
     l1=list()
     l2=list()
@@ -31,3 +33,6 @@ print(map2(add0,[1,2]))
 print(map2([add0,add1],1))
 print(map2([add0,add1],[1,2]))
 
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
