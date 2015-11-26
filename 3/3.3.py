@@ -17,8 +17,10 @@ def decwp(*_ars):
 def decwp2(_ars):
 	def dec1(_fn):
 		def dec2(*_ars2):
-			b=_fn(_ars2)
-			print (type(b))
+			#print(_ars, _ars2)
+			b=0
+			for i in range (0,len(_ars2)):
+				b+=_ars2[i]
 			if (type(b)!=_ars): print ("decwp2 not ok:(")
 			else:
 				print ("decwp2 OK!")
@@ -41,9 +43,6 @@ somef (6,1.5,6)
 @decwp2 (int)
 def somef(*_ars):
 	a=0
-	print (_ars)
-	for i in range(0,len(_ars[0])):
-		print (type (_ars[0][i]))
 	return type(a)
 
 somef (1,1)
