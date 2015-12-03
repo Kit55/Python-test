@@ -1,20 +1,21 @@
 import time
 
-
-def timecount(_somef):
-	def hid():
+def timecount_decor(_somef):
+	def timecount_decor_wrap(*_arr):
 		st=time.clock()
-		_somef()
+		result=_somef(*_arr)
 		ed=time.clock()
-		return (ed-st)
-	return hid
+		print ("Время выполнения функции=",ed-st)
+		return result
+	return timecount_decor_wrap
 
-@timecount
+@timecount_decor
 def countx():
 	for i in range (0,100000):
 		for g in range (0,1000):
 			a=i+g
 	return (a)
 
-print (countx())
-	
+countx()
+
+

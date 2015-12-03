@@ -1,49 +1,38 @@
-def decwp(*_ars):
-	def dec1(_fn):
-		def dec2(*_ars2):
-			#print (_ars,_ars2)
+def check_in_decor(*_ars):
+	def check_in_decor_fn(_fn):
+		def check_in_decor_ars(*_ars2):
 			if (len(_ars)!=len(_ars2)):
-				print ("decwp1 not ok:(")
-				return False
+				print ("check_in_decor not ok:(")
+				return (_fn(*_ars2))
 			for i in range (0,len(_ars)):
 				if _ars[i]!=type(_ars2[i]):
-					print ("decwp1 not ok:(")
-					return False
-			print ("decwp1 OK!")
-			return True
-		return dec2
-	return dec1
+					print ("check_in_decor not ok:(")
+					return (_fn(*_ars2))
+			print ("check_in_decor OK!")
+			return (_fn(*_ars2))
+		return check_in_decor_ars
+	return check_in_decor_fn
 
-def decwp2(_ars):
-	def dec1(_fn):
-		def dec2(*_ars2):
-			#print(_ars, _ars2)
-			b=0
-			for i in range (0,len(_ars2)):
-				b+=_ars2[i]
-			if (type(b)!=_ars): print ("decwp2 not ok:(")
+def check_out_decor(_ars):
+	def check_out_decor_fn(_fn):
+		def check_out_decor_ars(*_ars2):
+			b=_fn(*_ars2)
+			if (type(b)!=_ars): 
+				print ("check_out_decor not ok:(")
 			else:
-				print ("decwp2 OK!")
-			return True
-		return dec2
-	return dec1
+				print ("check_out_decor OK!")
+			return b
+		return check_out_decor_ars
+	return check_out_decor_fn
 
-
-@decwp(int,float)
+@check_in_decor(int,float)
+@check_out_decor(int)
 def somef(*_ars):
 	a=0
 	for i in range(0,len(_ars)):
-		a+=_ars[i]
-	return type(a)
+		a=a+_ars[i]
+	return a
 
-somef (1,2.5)
-somef (2.5,3.5)
-somef (6,1.5,6)
-
-@decwp2 (int)
-def somef(*_ars):
-	a=0
-	return type(a)
-
-somef (1,1)
-somef (1,1.5)
+print (somef (1,2.5))
+print ("\n")
+print (somef (1,2))
